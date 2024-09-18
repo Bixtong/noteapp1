@@ -1,21 +1,22 @@
 <?php
 function connectDB() {
-    $host = getenv('DB_HOST') ?: 'xogkc8sks4wkwgksk0o444sc'; // Use DB_HOST from environment or default to localhost
-    $dbname = getenv('DB_DATABASE') ?: 'default'; // Use DB_DATABASE from environment or default to 'default'
-    $username = getenv('DB_USERNAME') ?: 'mysql'; // Use DB_USERNAME from environment or default to 'mysql'
-    $password = getenv('DB_PASSWORD') ?: ''; // Use DB_PASSWORD from environment or default to empty string
-    $port = getenv('DB_PORT') ?: '3306'; // Use DB_PORT from environment or default to 3306
+    // Fetching environment variables for database connection
+    $host = getenv('DB_HOST') ?: 'localhost'; // Default to localhost if not set
+    $dbname = getenv('DB_DATABASE') ?: 'default'; // Default database name
+    $username = getenv('DB_USERNAME') ?: 'mysql'; // Default username
+    $password = getenv('DB_PASSWORD') ?: ''; // Default password
+    $port = getenv('DB_PORT') ?: '3306'; // Default to 3306
 
     try {
-        // Create a PDO connection using the above variables
+        // Create a new PDO instance for MySQL connection
         $conn = new PDO("mysql:host=$host;dbname=$dbname;port=$port", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Set error mode to exception
+        // Set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $conn; // Return the connection object
     } catch (PDOException $e) {
-        // Catch and display connection errors
+        // Handle connection errors
         echo "Connection failed: " . $e->getMessage();
+        return null; // Return null if connection fails
     }
-
-    return null; // Return null if connection fails
 }
 ?>
