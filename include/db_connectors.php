@@ -7,16 +7,15 @@ function connectDB() {
     $password = getenv('DB_PASSWORD') ?: ''; // Default password
     $port = getenv('DB_PORT') ?: '3306'; // Default to 3306
 
-    try {
-        // Create a new PDO instance for MySQL connection
-        $conn = new PDO("mysql:host=$host;dbname=$dbname;port=$port", $username, $password);
-        // Set the PDO error mode to exception
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        return $conn; // Return the connection object
-    } catch (PDOException $e) {
-        // Handle connection errors
-        echo "Connection failed: " . $e->getMessage();
+    // Create a new mysqli instance for MySQL connection
+    $conn = mysqli_connect($host, $username, $password, $dbname, $port);
+
+    // Check connection
+    if (!$conn) {
+        echo "Connection failed: " . mysqli_connect_error();
         return null; // Return null if connection fails
     }
+
+    return $conn; // Return the connection object
 }
 ?>
