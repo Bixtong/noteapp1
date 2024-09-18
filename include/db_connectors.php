@@ -1,6 +1,6 @@
 <?php
 function connectDB() {
-    $host = getenv('DB_HOST') ?: 'localhost'; // Use DB_HOST from environment or default to localhost
+    $host = getenv('DB_HOST') ?: 'xogkc8sks4wkwgksk0o444sc'; // Use DB_HOST from environment or default to localhost
     $dbname = getenv('DB_DATABASE') ?: 'default'; // Use DB_DATABASE from environment or default to 'default'
     $username = getenv('DB_USERNAME') ?: 'mysql'; // Use DB_USERNAME from environment or default to 'mysql'
     $password = getenv('DB_PASSWORD') ?: ''; // Use DB_PASSWORD from environment or default to empty string
